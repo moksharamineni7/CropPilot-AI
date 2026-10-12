@@ -1,0 +1,23 @@
+# Environment & Secrets
+.env
+.env.*
+*.env
+env.js
+
+# Whitelist templates
+!.env.example
+!env.example.js
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Builds
+dist/
+build/
+.vercel/
+
+# Logs & OS
+*.log
+.DS_Store
+Thumbs.db

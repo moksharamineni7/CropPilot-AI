@@ -1,0 +1,9 @@
+{
+  "name": "gemini-supabase-chatbot-frontend",
+  "version": "1.0.0",
+  "description": "Vanilla CSS & JS modern chat interface for Gemini & Supabase",
+  "scripts": {
+    "start": "npx -y serve . -p 5000",
+    "dev": "npx -y serve . -p 5000"
+  }
+}

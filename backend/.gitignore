@@ -1,0 +1,12 @@
+node_modules/
+package-lock.json
+
+.env
+.env.local
+.env.gemini
+.env.supabase
+*.env
+
+!.env.example
+!.env.gemini.example
+!.env.supabase.example

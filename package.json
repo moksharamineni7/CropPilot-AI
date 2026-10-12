@@ -1,0 +1,13 @@
+{
+  "name": "gemini-supabase-chatbot",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Full-stack Gemini & Supabase AI Chatbot monorepo",
+  "type": "module",
+  "scripts": {
+    "start": "npm start --prefix backend",
+    "dev": "npm run dev --prefix backend",
+    "backend": "npm start --prefix backend",
+    "frontend": "npm start --prefix frontend"
+  }
+}
