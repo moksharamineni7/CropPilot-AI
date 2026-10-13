@@ -553,25 +553,23 @@ app.post('/api/chat', async (req, res) => {
       assistantMsgRecord = await memoryStore.addMessage(activeConvId, 'assistant', fullAssistantResponse);
     }
 
-    if (history.length <= 2) {
-      try {
-        const titlePrompt = `Summarize this chat topic into 3-5 words maximum (no quotes, no punctuation):\nUser: "${message}"\nAssistant: "${fullAssistantResponse.slice(0, 100)}"`;
-        const titleGen = await genAiClient.models.generateContent({
-          model: 'gemini-3.8-flash',
-          contents: titlePrompt
-        });
-        const smartTitle = titleGen.text?.trim().replace(/^["']|["']$/g, '');
-        if (smartTitle) {
-          try {
-            await storage.updateConversationTitle(activeConvId, smartTitle);
-          } catch (e) {
-            await memoryStore.updateConversationTitle(activeConvId, smartTitle);
-          }
-          sendEvent('title_updated', { conversationId: activeConvId, title: smartTitle });
+    try {
+      const titlePrompt = `Summarize this chat topic into 3-5 words maximum (no quotes, no punctuation):\nUser: "${message}"\nAssistant: "${fullAssistantResponse.slice(0, 100)}"`;
+      const titleGen = await genAiClient.models.generateContent({
+        model: 'gemini-3.8-flash',
+        contents: titlePrompt
+      });
+      const smartTitle = titleGen.text?.trim().replace(/^["']|["']$/g, '');
+      if (smartTitle) {
+        try {
+          await storage.updateConversationTitle(activeConvId, smartTitle);
+        } catch (e) {
+          await memoryStore.updateConversationTitle(activeConvId, smartTitle);
         }
-      } catch (err) {
-        // Non-critical, ignore
+        sendEvent('title_updated', { conversationId: activeConvId, title: smartTitle });
       }
+    } catch (err) {
+      // Non-critical, ignore
     }
 
     sendEvent('done', {
